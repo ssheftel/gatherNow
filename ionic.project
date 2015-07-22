@@ -1,0 +1,12 @@
+{
+  "name": "gatherNow",
+  "app_id": "44459d6b",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
+}
