@@ -3,6 +3,8 @@
   "app_id": "44459d6b",
   "gulpStartupTasks": [
     "sass",
+    "coffee",
+    "copy_src",
     "watch"
   ],
   "watchPatterns": [
