@@ -10,6 +10,15 @@ ionicAppIoServiceCfg = ($ionicAppProvider) ->
   }
   return
 
+
+###
+  globaly disable all view caching as it messes up google maps
+  see: http://ionicframework.com/docs/api/directive/ionNavView/
+###
+disableIonicViewCaching = ($ionicConfigProvider) ->
+  $ionicConfigProvider.views.maxCache(0)
+  return
+
 # ------------------------------Add To Angular---------------------------------
 
 gatherNow = angular.module('gatherNow')

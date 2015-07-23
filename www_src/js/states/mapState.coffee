@@ -1,8 +1,8 @@
 ###
-  Events State Config - Events List index state of events
+  Map State Config - Google Map index state
 ###
 
-stateName = 'events'
+stateName = 'map'
 tabName = "#{stateName}" # derived - will be different for nested child states
 
 ###Derived and Defaulted Variables###
@@ -18,7 +18,6 @@ tpl = """
 <ion-view view-title="{{ #{ctrlInstName}.headerTitle }}">
   <ion-content class="padding">
     <h1>{{ #{ctrlInstName}.name }}</h1>
-    <a ui-sref="tab.events.eventDetails({eventId:10})">to details</a>
   </ion-content>
 </ion-view>
 """
@@ -32,7 +31,7 @@ Ctrl = ($log, $scope, cfg, $state) ->
   $log.log("Instantiating instance of #{ctrlName}")
 
   vm.name = ctrlName
-  vm.headerTitle = 'Upcoming Events'
+  vm.headerTitle = 'Event Map'
   window.$state = $state
 
   return

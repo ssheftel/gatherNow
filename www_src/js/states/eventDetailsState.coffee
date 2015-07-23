@@ -1,13 +1,13 @@
 ###
-  Events State Config - Events List index state of events
+  EventDetails State Config - EventDetails List index state of eventDetails
 ###
 
-stateName = 'events'
-tabName = "#{stateName}" # derived - will be different for nested child states
+stateName = 'eventDetails'
+tabName = 'events' # name of the tab from ion-nav-view name property - same as ui-view
 
 ###Derived and Defaulted Variables###
-parentStates = ['tab'] # should be '' if no parent
-url = "/#{stateName}" # derived - but may need to change
+parentStates = ['tab', 'events'] # should be '' if no parent
+url = "/:eventId" # derived - but may need to change
 ctrlName = "#{s.capitalize(stateName)}Ctrl"# 'EventDetailsCtrl'
 ctrlInstName = s.decapitalize(ctrlName)
 stateNamePrefix = parentStates.join('.')
@@ -17,8 +17,8 @@ fullStateName = "#{stateNamePrefix}.#{stateName}"
 tpl = """
 <ion-view view-title="{{ #{ctrlInstName}.headerTitle }}">
   <ion-content class="padding">
-    <h1>{{ #{ctrlInstName}.name }}</h1>
-    <a ui-sref="tab.events.eventDetails({eventId:10})">to details</a>
+    <h1>bob{{ #{ctrlInstName}.name }}</h1>
+    <a ui-sref=".eventSubDetails">to details</a>
   </ion-content>
 </ion-view>
 """
@@ -27,13 +27,12 @@ tpl = """
 rslvs = {}
 
 ###Controller###
-Ctrl = ($log, $scope, cfg, $state) ->
+Ctrl = ($log, $scope, cfg, $ionicNavBarDelegate) ->
   vm = @
   $log.log("Instantiating instance of #{ctrlName}")
 
   vm.name = ctrlName
-  vm.headerTitle = 'Upcoming Events'
-  window.$state = $state
+  vm.headerTitle = stateName
 
   return
 
