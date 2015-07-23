@@ -17,8 +17,8 @@ fullStateName = "#{stateNamePrefix}.#{stateName}"
 tpl = """
 <ion-view view-title="{{ #{ctrlInstName}.headerTitle }}">
   <ion-content class="padding">
-    <h1>bob{{ #{ctrlInstName}.name }}</h1>
-    <a ui-sref=".eventSubDetails">to details</a>
+    <h1>Event Details To Do</h1>
+    <!-- <h1>{{ #{ctrlInstName}.name }}</h1> -->
   </ion-content>
 </ion-view>
 """
