@@ -4,3 +4,15 @@
 node_modules/
 platforms/
 plugins/
+
+
+# Extra
+.tmp_notes_and_scripts
+#safe to commit config.xml ??
+config.xml
+
+# ignore files that are generated from other sources
+www/lib
+www/js
+www/css
+www/index.html

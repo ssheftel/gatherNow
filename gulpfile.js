@@ -11,10 +11,11 @@ var coffee = require('gulp-coffee');
 var sourcemaps = require('gulp-sourcemaps');
 
 var paths = {
-  www: './www/js',
-  www_src: ['./www_src/js'],
+  www: './www',
+  www_js: './www/js',
+  www_src: './www_src/js',
   coffee_src: ['./www_src/js/**/*.coffee'],
-  non_coffee_src: './www_src/js/**/*.!(coffee)',
+  non_coffee_src: './www_src/**/*.!(coffee)',
   sass: ['./scss/**/*.scss']
 };
 
@@ -26,7 +27,7 @@ gulp.task('coffee', function() {
     .pipe(sourcemaps.init())
     .pipe(coffee().on('error', gutil.log)) // {bare: true}
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest(paths.www))
+    .pipe(gulp.dest(paths.www_js))
 });
 
 // Coppy non Coffeescript files in the ./www_src/js directory to ./www/js

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <title>GatherNow</title>
+
+
+  <!-- compiled css output -->
+  <link href="css/ionic.app.css" rel="stylesheet">
+
+  <!-- ionic/angularjs js -->
+  <script src="lib/ionic/js/ionic.bundle.js"></script>
+  <script src="lib/angular-websocket/angular-websocket.js"></script>
+  <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+  <script src="lib/ionic-service-core/ionic-core.js"></script>
+  <script src="lib/ionic-service-push/ionic-push.js"></script>
+  <script src="lib/ionic-service-deploy/ionic-deploy.js"></script>
+  <script src="lib/ionic-service-analytics/ionic-analytics.js"></script>
+
+  <!-- cordova script (this will be a 404 during development) -->
+  <script src="cordova.js"></script>
+  <!--<script src="lib/ngCordova/dist/ng-cordova.js"></script>-->
+
+  <!-- Third Party-->
+  <script src="lib/jquery/dist/jquery.js"></script>
+  <script src="lib/lodash/lodash.js"></script>
+  <script src="lib/underscore.string/dist/underscore.string.js"></script>
+  <script src="lib/moment/min/moment.min.js"></script>
+  <script src="lib/angular-moment/angular-moment.js"></script>
+  <script src="lib/angular-filter/dist/angular-filter.js"></script>
+  <script src="lib/ngstorage/ngStorage.js"></script>
+
+  <!-- START -->
+
+  <!-- START_APP -->
+  <script src="js/gatherNow.js"></script>
+  <script src="js/app/cfg.js"></script>
+  <script src="js/app/app-configuration.js"></script>
+  <script src="js/app/app-configuration-state-and-urls.js"></script>
+  <script src="js/tabs.js"></script>
+  <script src="js/app/appModel.js"></script>
+  <script src="js/app/appCtrl.js"></script>
+  <script src="js/app/app-run.js"></script>
+  <!-- APP_INSERT_POINT -->
+  <!-- END_APP -->
+
+  <!-- START_MODELS -->
+  <script src="js/models/index.js"></script>
+  <!-- MODELS_INSERT_POINT -->
+  <!-- END_MODELS -->
+
+  <!-- START_SERVICES -->
+  <script src="js/services/index.js"></script>
+  <!-- SERVICES_INSERT_POINT -->
+  <!-- END_SERVICES -->
+
+  <!-- START_FILTERS -->
+  <script src="js/filters/index.js"></script>
+  <!-- FILTERS_INSERT_POINT -->
+  <!-- END_FILTERS -->
+
+  <!-- START_DIRECTIVES -->
+  <script src="js/directives/index.js"></script>
+  <!-- DIRECTIVES_INSERT_POINT -->
+  <!-- END_DIRECTIVES -->
+
+  <!-- START_STATES -->
+  <script src="js/states/index.js"></script>
+  <script src="js/states/eventsState.js"></script>
+  <!-- STATE_INSERT_POINT -->
+  <!-- END_STATE -->
+
+  <!-- END -->
+
+</head>
+<body ng-app="gatherNow" ng-controller="AppCtrl as appCtrl"><!-- ng-app="gatherNow" added to Body in app-bootstrap.js -->
+  <!-- START NG-APP CONTENT -->
+
+  <!--The nav bar that will be updated as we navigate between views.-->
+  <!-- START NAV BAR -->
+  <ion-nav-bar class="bar-dark">
+    <ion-nav-back-button></ion-nav-back-button>
+  </ion-nav-bar>
+  <!-- END NAV BAR -->
+
+  <!-- START MAIN APP UI-VIEW -->
+  <ion-nav-view animation="slide-left-right"></ion-nav-view>
+  <!-- END MAIN APP UI-VIEW -->
+
+  <!-- END NG-APP CONTENT -->
+
+  <!-- START MANUAL APPLICATION BOOTSTRAPPING -->
+  <script src="js/app/app-bootstrap.js"></script>
+  <!-- END MANUAL APPLICATION BOOTSTRAPPING -->
+</body>
+</html>
