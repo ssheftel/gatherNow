@@ -1,23 +1,28 @@
 ###
-  Preferences State Config - User Preferences menue index state
+  EventDetails State Config - EventDetails List index state of eventDetails
+  stateName = preferences
+  fileName = preferencesState.coffee
+  jsFileName = preferencesState.js
+  ctrlName = PreferencesCtrl
+  ctrlInstsName = preferencesCtrl
+  stateNamePrefix = tab
+  fullStateName = tab.preferences
+  tabName = preferences
+  url = /preferences
 ###
 
-stateName = 'preferences'
-tabName = "#{stateName}" # derived - will be different for nested child states
-
-###Derived and Defaulted Variables###
-parentStates = ['tab'] # should be '' if no parent
-url = "/#{stateName}" # derived - but may need to change
-ctrlName = "#{s.capitalize(stateName)}Ctrl"# 'EventDetailsCtrl'
-ctrlInstName = s.decapitalize(ctrlName)
-stateNamePrefix = parentStates.join('.')
-fullStateName = "#{stateNamePrefix}.#{stateName}"
+stateName = "preferences"
+tabName = "preferences"
+url = "/preferences" # derived - but may need to change
+ctrlName = "PreferencesCtrl"
+ctrlInstName = "preferencesCtrl"
+fullStateName = "tab.preferences"
 
 ###Template###
 tpl = """
-<ion-view view-title="{{ #{ctrlInstName}.headerTitle }}">
+<ion-view cache-view="false" view-title="{{ preferencesCtrl.headerTitle }}">
   <ion-content class="padding">
-    <h1>{{ #{ctrlInstName}.name }}</h1>
+    <h1>{{ preferencesCtrl.name }}</h1>
   </ion-content>
 </ion-view>
 """
@@ -26,28 +31,33 @@ tpl = """
 rslvs = {}
 
 ###Controller###
-Ctrl = ($log, $scope, cfg, $state) ->
+Ctrl = ($log, $scope, cfg) ->
   vm = @
-  $log.log("Instantiating instance of #{ctrlName}")
+  $log.log("Instantiating instance of PreferencesCtrl")
 
-  vm.name = ctrlName
-  vm.headerTitle = 'Preferences'
-  window.$state = $state
+  vm.name = "PreferencesCtrl"
+  vm.headerTitle = "preferences"
 
+
+  # activation fn
+  vm.activate = ->
+    return
+
+  vm.activate() # run activate fn
   return
 
 ###State Config###
 stateCfg = {
-  url: url
+  url: "/preferences"
   resolve: rslvs
-  views: "#{tabName}@tab": {
+  views: "preferences@tab": {
   template: tpl
-  controller: "#{ctrlName} as #{ctrlInstName}"}
+  controller: "PreferencesCtrl as preferencesCtrl"}
 }
 
 
 
 # ------------------------------Add To App-------------------------------------
 gatherNowStates = angular.module('gatherNow.states')
-gatherNowStates.controller(ctrlName, Ctrl)
-gatherNowStates.config(($stateProvider) -> $stateProvider.state(fullStateName, stateCfg);return;)
+gatherNowStates.controller("PreferencesCtrl", Ctrl)
+gatherNowStates.config(($stateProvider) -> $stateProvider.state("tab.preferences", stateCfg);return;)

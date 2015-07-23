@@ -1,40 +1,45 @@
 ###
-  Events State Config - Events List index state of events
+  EventDetails State Config - EventDetails List index state of eventDetails
+  stateName = events
+  fileName = eventsState.coffee
+  jsFileName = eventsState.js
+  ctrlName = EventsCtrl
+  ctrlInstsName = eventsCtrl
+  stateNamePrefix = tab
+  fullStateName = tab.events
+  tabName = events
+  url = /events
 ###
 
-stateName = 'events'
-tabName = "#{stateName}" # derived - will be different for nested child states
-
-###Derived and Defaulted Variables###
-parentStates = ['tab'] # should be '' if no parent
-url = "/#{stateName}" # derived - but may need to change
-ctrlName = "#{s.capitalize(stateName)}Ctrl"# 'EventDetailsCtrl'
-ctrlInstName = s.decapitalize(ctrlName)
-stateNamePrefix = parentStates.join('.')
-fullStateName = "#{stateNamePrefix}.#{stateName}"
+stateName = "events"
+tabName = "events"
+url = "/events" # derived - but may need to change
+ctrlName = "EventsCtrl"
+ctrlInstName = "eventsCtrl"
+fullStateName = "tab.events"
 
 ###Template###
 tpl = """
-<ion-view view-title="{{ #{ctrlInstName}.headerTitle }}">
+<ion-view cache-view="false" view-title="{{ eventsCtrl.headerTitle }}">
   <ion-content class="padding">
     <ion-list>
-      <ion-item ng-repeat="item in #{ctrlInstName}.events">
+      <ion-item ng-repeat="item in eventsCtrl.events">
         <a class="item item-thumbnail-left" ui-sref="tab.events.eventDetails({eventId: item._id})"> <!--ng-class="{'item-thumbnail-left': item.image_url}"-->
           <img ng-src="{{item.image_url || 'http://www.gatherthejews.com/wp-content/uploads/2015/03/gather_the_jews_rectangle.png'}}">
           <h2>{{item.title}}</h2>
           <h3>{{item.start_date | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}</h3>
         </a>
       </ion-item>
-    </ion-list>
-    <!--<a ui-sref="tab.events.eventDetails({eventId:10})">to details</a>-->
+
     <ion-infinite-scroll
       on-infinite="#{ctrlInstName}.loadMore()"
       distance="5%">
     </ion-infinite-scroll>
+
+    </ion-list>
   </ion-content>
 </ion-view>
 """
-
 ###Resolve Functions###
 rslvs = {}
 rslvs.events = ($http) ->
@@ -51,6 +56,9 @@ Ctrl = ($log, $scope, cfg, $state, events, $http) ->
   vm.headerTitle = 'Upcoming Events'
   vm.events = events._items
   window.$state = $state
+  activate = ->
+    $log.log('activating!')
+    return
   page=1
   vm.loadMore = ->
     page += 1
@@ -62,20 +70,21 @@ Ctrl = ($log, $scope, cfg, $state, events, $http) ->
         return
     return
 
+  activate()
   return
 
 ###State Config###
 stateCfg = {
-  url: url
+  url: "/events"
   resolve: rslvs
-  views: "#{tabName}@tab": {
+  views: "events@tab": {
   template: tpl
-  controller: "#{ctrlName} as #{ctrlInstName}"}
+  controller: "EventsCtrl as eventsCtrl"}
 }
 
 
 
 # ------------------------------Add To App-------------------------------------
 gatherNowStates = angular.module('gatherNow.states')
-gatherNowStates.controller(ctrlName, Ctrl)
-gatherNowStates.config(($stateProvider) -> $stateProvider.state(fullStateName, stateCfg);return;)
+gatherNowStates.controller("EventsCtrl", Ctrl)
+gatherNowStates.config(($stateProvider) -> $stateProvider.state("tab.events", stateCfg);return;)

@@ -1,24 +1,28 @@
 ###
   EventDetails State Config - EventDetails List index state of eventDetails
+  stateName = eventDetails
+  fileName = eventDetailsState.coffee
+  jsFileName = eventDetailsState.js
+  ctrlName = EventDetailsCtrl
+  ctrlInstsName = eventDetailsCtrl
+  stateNamePrefix = tab.events
+  fullStateName = tab.events.eventDetails
+  tabName = events
+  url = /:eventId
 ###
 
-stateName = 'eventDetails'
-tabName = 'events' # name of the tab from ion-nav-view name property - same as ui-view
-
-###Derived and Defaulted Variables###
-parentStates = ['tab', 'events'] # should be '' if no parent
+stateName = "eventDetails"
+tabName = "events"
 url = "/:eventId" # derived - but may need to change
-ctrlName = "#{s.capitalize(stateName)}Ctrl"# 'EventDetailsCtrl'
-ctrlInstName = s.decapitalize(ctrlName)
-stateNamePrefix = parentStates.join('.')
-fullStateName = "#{stateNamePrefix}.#{stateName}"
+ctrlName = "EventDetailsCtrl"
+ctrlInstName = "eventDetailsCtrl"
+fullStateName = "tab.events.eventDetails"
 
 ###Template###
 tpl = """
-<ion-view view-title="{{ #{ctrlInstName}.headerTitle }}">
+<ion-view cache-view="false" view-title="{{ eventDetailsCtrl.headerTitle }}">
   <ion-content class="padding">
-    <h1>Event Details To Do</h1>
-    <!-- <h1>{{ #{ctrlInstName}.name }}</h1> -->
+    <h1>{{ eventDetailsCtrl.name }}</h1>
   </ion-content>
 </ion-view>
 """
@@ -27,27 +31,33 @@ tpl = """
 rslvs = {}
 
 ###Controller###
-Ctrl = ($log, $scope, cfg, $ionicNavBarDelegate) ->
+Ctrl = ($log, $scope, cfg) ->
   vm = @
-  $log.log("Instantiating instance of #{ctrlName}")
+  $log.log("Instantiating instance of EventDetailsCtrl")
 
-  vm.name = ctrlName
-  vm.headerTitle = stateName
+  vm.name = "EventDetailsCtrl"
+  vm.headerTitle = "eventDetails"
 
+
+  # activation fn
+  vm.activate = ->
+    return
+
+  vm.activate() # run activate fn
   return
 
 ###State Config###
 stateCfg = {
-  url: url
+  url: "/:eventId"
   resolve: rslvs
-  views: "#{tabName}@tab": {
+  views: "events@tab": {
   template: tpl
-  controller: "#{ctrlName} as #{ctrlInstName}"}
+  controller: "EventDetailsCtrl as eventDetailsCtrl"}
 }
 
 
 
 # ------------------------------Add To App-------------------------------------
 gatherNowStates = angular.module('gatherNow.states')
-gatherNowStates.controller(ctrlName, Ctrl)
-gatherNowStates.config(($stateProvider) -> $stateProvider.state(fullStateName, stateCfg);return;)
+gatherNowStates.controller("EventDetailsCtrl", Ctrl)
+gatherNowStates.config(($stateProvider) -> $stateProvider.state("tab.events.eventDetails", stateCfg);return;)

@@ -3,21 +3,17 @@
 ###
 
 stateName = 'map'
-tabName = "#{stateName}" # derived - will be different for nested child states
-
-###Derived and Defaulted Variables###
-parentStates = ['tab'] # should be '' if no parent
-url = "/#{stateName}" # derived - but may need to change
-ctrlName = "#{s.capitalize(stateName)}Ctrl"# 'EventDetailsCtrl'
-ctrlInstName = s.decapitalize(ctrlName)
-stateNamePrefix = parentStates.join('.')
-fullStateName = "#{stateNamePrefix}.#{stateName}"
+tabName = "map" # derived - will be different for nested child states
+url = "/map"
+ctrlName = "MapCtrl"
+ctrlInstName = "mapCtrl"
+fullStateName = "tab.map"
 
 ###Template###
 tpl = """
-<ion-view view-title="{{ #{ctrlInstName}.headerTitle }}">
+<ion-view cache-view="false" view-title="{{ mapCtrl.headerTitle }}">
   <ion-content class="padding">
-    <h1>{{ #{ctrlInstName}.name }}</h1>
+    <h1>{{ mapCtrl.name }}</h1>
   </ion-content>
 </ion-view>
 """
@@ -28,7 +24,7 @@ rslvs = {}
 ###Controller###
 Ctrl = ($log, $scope, cfg, $state) ->
   vm = @
-  $log.log("Instantiating instance of #{ctrlName}")
+  $log.log("Instantiating instance of MapCtrl")
 
   vm.name = ctrlName
   vm.headerTitle = 'Event Map'
@@ -42,7 +38,7 @@ stateCfg = {
   resolve: rslvs
   views: "#{tabName}@tab": {
   template: tpl
-  controller: "#{ctrlName} as #{ctrlInstName}"}
+  controller: "MapCtrl as mapCtrl"}
 }
 
 
