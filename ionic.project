@@ -5,6 +5,7 @@
     "sass",
     "coffee",
     "copy_src",
+    "preprocess_html",
     "watch"
   ],
   "watchPatterns": [

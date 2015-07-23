@@ -9,14 +9,21 @@ var sh = require('shelljs');
 //
 var coffee = require('gulp-coffee');
 var sourcemaps = require('gulp-sourcemaps');
+var preprocess = require('gulp-preprocess');
 
 var paths = {
   www: './www',
   www_js: './www/js',
   www_src: './www_src/js',
   coffee_src: ['./www_src/js/**/*.coffee'],
-  non_coffee_src: './www_src/**/*.!(coffee)',
-  sass: ['./scss/**/*.scss']
+  non_coffee_src: ['!./www_src/index.html', './www_src/**/*.!(coffee)'],
+  index_html_src: './www_src/*.html',
+  index_html_www: './www/',
+  sass: ['./scss/**/*.scss'],
+};
+
+var preprocessor_context = {
+  DEBUG: true
 };
 
 gulp.task('default', ['sass']);
@@ -34,6 +41,15 @@ gulp.task('coffee', function() {
 gulp.task('copy_src', function() {
   gulp.src(paths.non_coffee_src)
     .pipe(gulp.dest(paths.www))
+});
+
+// Preprocess html
+gulp.task('preprocess_html', function() {
+  // TODO: remove require
+  var processor = preprocess({context:preprocessor_context});
+  gulp.src(paths.index_html_src)
+    .pipe(processor)
+    .pipe(gulp.dest(paths.www));
 });
 
 gulp.task('sass', function(done) {
@@ -54,6 +70,7 @@ gulp.task('watch', function() {
   gulp.watch(paths.sass, ['sass']);
   gulp.watch(paths.non_coffee_src, ['copy_src']);
   gulp.watch(paths.coffee_src, ['coffee']);
+  gulp.watch(paths.index_html_src, ['preprocess_html']);
 });
 
 gulp.task('install', ['git-check'], function() {
