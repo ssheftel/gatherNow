@@ -5,7 +5,7 @@
 # -------------------------------Template--------------------------------------
 
 tpl = """
-<ion-tabs class="tabs-icon-top tabs-background-dark tabs-color-stable">
+<ion-tabs class="tabs-icon-top tabs-color-active-positive">
 
   <!-- START EVENTS TAB -->
   <ion-tab title="Events" icon-off="ion-ios-calendar-outline" icon-on="ion-ios-calendar" ui-sref="tab.events">
