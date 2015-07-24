@@ -1,49 +1,55 @@
 ###
-  Map State Config - Google Map index state
+  EventDetails State Config - EventDetails List index state of eventDetails
+  stateName = map
+  fileName = mapState.coffee
+  jsFileName = mapState.js
+  ctrlName = MapCtrl
+  ctrlInstsName = mapCtrl
+  stateNamePrefix = tab
+  fullStateName = tab.map
+  tabName = map
+  url = /map
 ###
 
-stateName = 'map'
-tabName = "map" # derived - will be different for nested child states
-url = "/map"
+stateName = "map"
+tabName = "map"
+url = "/map" # derived - but may need to change
 ctrlName = "MapCtrl"
 ctrlInstName = "mapCtrl"
 fullStateName = "tab.map"
-
-###Template###
-tpl = """
-<ion-view cache-view="false" view-title="{{ mapCtrl.headerTitle }}">
-  <ion-content class="padding">
-    <h1>{{ mapCtrl.name }}</h1>
-  </ion-content>
-</ion-view>
-"""
 
 ###Resolve Functions###
 rslvs = {}
 
 ###Controller###
-Ctrl = ($log, $scope, cfg, $state) ->
+Ctrl = ($log, $scope, cfg) ->
   vm = @
   $log.log("Instantiating instance of MapCtrl")
 
-  vm.name = ctrlName
-  vm.headerTitle = 'Event Map'
-  window.$state = $state
+  vm.name = "MapCtrl"
+  vm.headerTitle = "map"
 
+
+  # activation fn
+  vm.activate = ->
+    return
+
+  vm.activate() # run activate fn
   return
 
 ###State Config###
 stateCfg = {
-  url: url
+  url: "/map"
   resolve: rslvs
-  views: "#{tabName}@tab": {
-  template: tpl
+  views: "map@tab": {
+  templateUrl: 'js/states/map.html'
   controller: "MapCtrl as mapCtrl"}
+  cache: false
 }
 
 
 
 # ------------------------------Add To App-------------------------------------
 gatherNowStates = angular.module('gatherNow.states')
-gatherNowStates.controller(ctrlName, Ctrl)
-gatherNowStates.config(($stateProvider) -> $stateProvider.state(fullStateName, stateCfg);return;)
+gatherNowStates.controller("MapCtrl", Ctrl)
+gatherNowStates.config(($stateProvider) -> $stateProvider.state("tab.map", stateCfg);return;)
