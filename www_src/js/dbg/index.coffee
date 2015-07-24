@@ -26,7 +26,7 @@ logUiRouterEvents = ($log, $rootScope) ->
 ###
   globlaly expose select angular services on window.dbg
 ###
-globlalyExposeServices = ( $window, $rootScope, $http, $q, $state, $stateParams, $log) ->
+globlalyExposeServices = ( $window, $rootScope, $http, $q, $state, $stateParams, $log, $ionicScrollDelegate) ->
   dbg = $window.dbg
   dbg.$rootScope = $rootScope
   dbg.$http = $http
@@ -35,6 +35,7 @@ globlalyExposeServices = ( $window, $rootScope, $http, $q, $state, $stateParams,
   dbg.$stateParams = $stateParams
   dbg.$log = $log
   dbg.gatherNow = angular.module('gatherNow')
+  dbg.$ionicScrollDelegate = $ionicScrollDelegate
 
 # -----------------------------------------------------------------------------
 gatherNow = angular.module('gatherNow')

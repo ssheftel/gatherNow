@@ -23,12 +23,16 @@ tpl = """
 <ion-view cache-view="false" view-title="{{ eventsCtrl.headerTitle }}">
   <ion-content class="padding">
     <ion-list>
-      <ion-item ng-repeat="item in eventsCtrl.events">
-        <a class="item item-thumbnail-left" ui-sref="tab.events.eventDetails({eventId: item._id})"> <!--ng-class="{'item-thumbnail-left': item.image_url}"-->
+      <ion-item class="item-avatar item-icon-right item-text-wrap" ng-repeat="item in eventsCtrl.events" ui-sref="tab.events.eventDetails({eventId: item._id})">
+
           <img ng-src="{{item.image_url || 'http://www.gatherthejews.com/wp-content/uploads/2015/03/gather_the_jews_rectangle.png'}}">
+          <i class="icon ion-chevron-right"></i>
+
           <h2>{{item.title}}</h2>
-          <h3>{{item.start_date | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}</h3>
-        </a>
+          <p ng-if="item.venue">{{item.venue}}</p>
+          <p>{{item.start_date | amDateFormat:'ddd. MMM Do'}} from {{item.start_date | amDateFormat:'h:mm a'}} - {{item.end_date | amDateFormat:'h:mm a'}}</p>
+
+
       </ion-item>
 
     <ion-infinite-scroll
@@ -43,8 +47,14 @@ tpl = """
 ###Resolve Functions###
 rslvs = {}
 rslvs.events = ($http) ->
-  return $http.get('https://gather-now-service.herokuapp.com/events')
-    .then (resp) -> resp.data
+  config = params:
+    max_results: 200
+    sort: 'start_date'
+    where: """{"start_date": {"$gte": "#{new Date().toISOString()}"}}"""
+  return $http.get(
+    'https://gather-now-service.herokuapp.com/events', config
+    ).then (resp) ->
+      resp.data
 
 
 ###Controller###
@@ -58,7 +68,7 @@ Ctrl = ($log, $scope, cfg, $state, events, $http) ->
   window.$state = $state
   activate = ->
     $log.log('activating!')
-    return
+
   page=1
   vm.loadMore = ->
     page += 1
@@ -67,11 +77,11 @@ Ctrl = ($log, $scope, cfg, $state, events, $http) ->
         for newItem in resp.data['_items']
           vm.events.push(newItem)
         $scope.$broadcast('scroll.infiniteScrollComplete')
-        return
-    return
+
+
 
   activate()
-  return
+
 
 ###State Config###
 stateCfg = {
@@ -87,4 +97,4 @@ stateCfg = {
 # ------------------------------Add To App-------------------------------------
 gatherNowStates = angular.module('gatherNow.states')
 gatherNowStates.controller("EventsCtrl", Ctrl)
-gatherNowStates.config(($stateProvider) -> $stateProvider.state("tab.events", stateCfg);return;)
+gatherNowStates.config(($stateProvider) -> $stateProvider.state("tab.events", stateCfg))
