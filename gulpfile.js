@@ -10,6 +10,7 @@ var sh = require('shelljs');
 var coffee = require('gulp-coffee');
 var sourcemaps = require('gulp-sourcemaps');
 var preprocess = require('gulp-preprocess');
+var autoprefixer = require('gulp-autoprefixer');
 
 var paths = {
   www: './www',
@@ -57,6 +58,7 @@ gulp.task('sass', function(done) {
     .pipe(sass({
       errLogToConsole: true
     }))
+    .pipe(autoprefixer())
     .pipe(gulp.dest('./www/css/'))
     .pipe(minifyCss({
       keepSpecialComments: 0

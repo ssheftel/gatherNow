@@ -1,0 +1,31 @@
+
+// From http://codepen.io/mhartington/pen/ablpc
+.card-wrap{
+  height: 100% !important;
+  display: flex!important ;
+  flex-wrap: nowrap!important ;
+  justify-content: space-between!important ;
+  align-content: space-around!important ;
+  align-items: stretch!important ;
+  flex-direction: column!important ;
+  display: -webkit-box!important ;
+  display: -moz-box!important ;
+  display: -ms-flexbox!important ;
+  display: -webkit-flex!important ;
+}
+
+// From http://codepen.io/mhartington/pen/ablpc
+.full-card {
+  flex: 1 1 auto !important ;
+  align-self: stretch !important ;
+  display: -webkit-box !important ;
+  display: -moz-box !important ;
+  display: -ms-flexbox !important ;
+  display: -webkit-flex !important ;
+  display: flex !important ;
+  flex-direction: row !important ;
+  flex-wrap: nowrap !important ;
+  justify-content: center !important ;
+  align-content: space-between !important ;
+  align-items: center !important ;
+}

@@ -7,6 +7,7 @@
 constantName = 'cfg'
 
 cfg = {
+  "api": "https://gather-now-service.herokuapp.com"
 
 }
 

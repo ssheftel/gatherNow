@@ -34,25 +34,19 @@ tpl = """
 
 
       </ion-item>
-
-    <ion-infinite-scroll
-      on-infinite="#{ctrlInstName}.loadMore()"
-      distance="5%">
-    </ion-infinite-scroll>
-
     </ion-list>
   </ion-content>
 </ion-view>
 """
 ###Resolve Functions###
 rslvs = {}
-rslvs.events = ($http) ->
+rslvs.events = ($http, cfg) ->
   config = params:
     max_results: 200
     sort: 'start_date'
     where: """{"start_date": {"$gte": "#{new Date().toISOString()}"}}"""
   return $http.get(
-    'https://gather-now-service.herokuapp.com/events', config
+    "#{cfg.api}/events", config
     ).then (resp) ->
       resp.data
 
@@ -68,15 +62,6 @@ Ctrl = ($log, $scope, cfg, $state, events, $http) ->
   window.$state = $state
   activate = ->
     $log.log('activating!')
-
-  page=1
-  vm.loadMore = ->
-    page += 1
-    $http.get('https://gather-now-service.herokuapp.com/events', params:{'page':page})
-      .then (resp) ->
-        for newItem in resp.data['_items']
-          vm.events.push(newItem)
-        $scope.$broadcast('scroll.infiniteScrollComplete')
 
 
 
