@@ -20,7 +20,7 @@ fullStateName = "tab.events"
 
 ###Template###
 tpl = """
-<ion-view cache-view="false" view-title="{{ eventsCtrl.headerTitle }}">
+<ion-view view-title="{{ eventsCtrl.headerTitle }}">
   <ion-content class="padding">
     <ion-list>
       <ion-item class="item-avatar item-icon-right item-text-wrap" ng-repeat="item in eventsCtrl.events" ui-sref="tab.events.eventDetails({eventId: item._id})">
