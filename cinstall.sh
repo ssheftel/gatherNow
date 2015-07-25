@@ -25,6 +25,7 @@ cordova plugin add $SCRIPTPATH/cached_plugins/phonegap-facebook-plugin --variabl
 cordova plugin add $SCRIPTPATH/cached_plugins/phonegap-googlemaps-plugin --variable API_KEY_FOR_ANDROID="$GMAPS_API_KEY_FOR_ANDROID" --variable API_KEY_FOR_IOS="$GMAPS_API_KEY_FOR_IOS"
 cordova plugin add org.apache.cordova.splashscreen
 cordova plugin add $SCRIPTPATH/cached_plugins/Calendar-PhoneGap-Plugin
+#cordova plugin add $SCRIPTPATH/cached_plugins/cordova-plugin-background-geolocation
 #
 cordova plugin add org.apache.cordova.device
 cordova plugin add org.apache.cordova.device-motion
