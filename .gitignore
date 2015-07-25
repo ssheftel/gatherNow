@@ -17,5 +17,6 @@ www/js
 www/css
 www/index.html
 .env
+.old-env
 .idea
 cached_plugins
