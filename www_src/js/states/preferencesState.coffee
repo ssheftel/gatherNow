@@ -60,4 +60,4 @@ stateCfg = {
 # ------------------------------Add To App-------------------------------------
 gatherNowStates = angular.module('gatherNow.states')
 gatherNowStates.controller("PreferencesCtrl", Ctrl)
-gatherNowStates.config(($stateProvider) -> $stateProvider.state("tab.preferences", stateCfg);return;)
+gatherNowStates.config(($stateProvider) -> $stateProvider.state("tab.preferences", stateCfg))

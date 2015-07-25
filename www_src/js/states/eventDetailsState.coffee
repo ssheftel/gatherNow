@@ -75,4 +75,4 @@ stateCfg = {
 # ------------------------------Add To App-------------------------------------
 gatherNowStates = angular.module('gatherNow.states')
 gatherNowStates.controller("EventDetailsCtrl", Ctrl)
-gatherNowStates.config(($stateProvider) -> $stateProvider.state("tab.events.eventDetails", stateCfg);return;)
+gatherNowStates.config(($stateProvider) -> $stateProvider.state("tab.events.eventDetails", stateCfg))

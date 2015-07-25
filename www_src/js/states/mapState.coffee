@@ -52,4 +52,4 @@ stateCfg = {
 # ------------------------------Add To App-------------------------------------
 gatherNowStates = angular.module('gatherNow.states')
 gatherNowStates.controller("MapCtrl", Ctrl)
-gatherNowStates.config(($stateProvider) -> $stateProvider.state("tab.map", stateCfg);return;)
+gatherNowStates.config(($stateProvider) -> $stateProvider.state("tab.map", stateCfg))
