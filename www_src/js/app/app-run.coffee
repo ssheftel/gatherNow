@@ -3,7 +3,16 @@ gatherNow = angular.module('gatherNow')
 
 # ------------------------------Main Code--------------------------------------
 
+splashScreenTimerRunFn = ($log, $cordovaSplashscreen, eventsService) ->
+  $log.log('getting events data, will hide splash screen after promise resolves')
+  ###TODO: handel when user has no internet connection###
+  eventsService.loadEvents().then (data) ->
+    $log.log('hiding splash screen')
+    $cordovaSplashscreen.hide()
+
 runFn = ($rootScope, $ionicDeploy, $ionicPlatform, $cordovaStatusbar, $log) ->
+
+
   onAppReady = ->
     # Hide the accessory bar by default
     if window.cordova and window.cordova.plugins and window.cordova.plugins.Keyboard
@@ -35,4 +44,5 @@ runFn = ($rootScope, $ionicDeploy, $ionicPlatform, $cordovaStatusbar, $log) ->
 
 # ------------------------------Add To App-------------------------------------
 
+gatherNow.run(splashScreenTimerRunFn)
 gatherNow.run(runFn)

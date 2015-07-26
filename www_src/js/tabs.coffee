@@ -20,9 +20,9 @@ tpl = """
   <!-- END MAP TAB -->
 
   <!-- START PREFERENCES TAB -->
-  <ion-tab title="Preferences" icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" ui-sref="tab.preferences">
-    <ion-nav-view name="preferences"></ion-nav-view><!-- "preferences" named view -->
-  </ion-tab>
+  <!--<ion-tab title="Preferences" icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" ui-sref="tab.preferences">-->
+    <!--<ion-nav-view name="preferences"></ion-nav-view>&lt;!&ndash; "preferences" named view &ndash;&gt;-->
+  <!--</ion-tab>-->
   <!-- END PREFERENCES TAB -->
 
 </ion-tabs>
