@@ -85,6 +85,15 @@ googleMapDirective = ($log, $timeout) ->
         map.clear()
         return map
 
+    ###
+      Remove Map instance from dom
+    ###
+    vm.remove = ->
+      vm.mapPromise.then (map) ->
+        map.remove()
+        vm._map = null
+        vm._map
+
 
     return
   d.require = 'googleMap'
@@ -111,7 +120,7 @@ googleMapDirective = ($log, $timeout) ->
 
     destroyCb = ->
       $log.log("#{googleMapDirectiveName} destroyed removing map instance")
-      map.remove()
+      googleMapCtrl.remove()
     # Remove map when scope is destroyed
     scope.$on('$destroy',destroyCb)
 

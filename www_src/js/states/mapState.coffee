@@ -29,7 +29,7 @@ Ctrl = ($log, $scope, cfg, $timeout, events, eventsService) ->
   $log.log("Instantiating instance of MapCtrl")
 
   vm.name = "MapCtrl"
-  vm.headerTitle = "map"
+  vm.headerTitle = "Map"
 
   #TODO: remove ctrl from params and wrap map api improvements in a serviceModel
   $scope.onMapInit = (map, googleMapCtrl) ->
