@@ -31,9 +31,19 @@ Ctrl = ($log, $scope, cfg, $timeout, events, eventsService) ->
   vm.name = "MapCtrl"
   vm.headerTitle = "map"
 
-  $scope.onMapInit = (map) ->
+  #TODO: remove ctrl from params and wrap map api improvements in a serviceModel
+  $scope.onMapInit = (map, googleMapCtrl) ->
     $log.log('map is ready!')
     #map.setCenter(new plugin.google.maps.LatLng(37.422858, -122.085065))
+    for event in events
+      continue if not event.latlng
+      googleMapCtrl.addMarker({
+        title: "#{event.title} @ #{event.venue}"
+        snippet: "#{event.start_moment.format('ddd. MMM Do')} from #{event.start_moment.format('h:mm a')} - #{event.end_moment.format('h:mm a')}"
+        position: event.latlng
+        icon: 'img/map_icons/hellow_blue_pin.png'
+        styles: {'text-align': 'center'}
+      })
 
   # activation fn
   vm.activate = ->
