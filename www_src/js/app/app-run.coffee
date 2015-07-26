@@ -10,7 +10,7 @@ splashScreenTimerRunFn = ($log, $cordovaSplashscreen, eventsService) ->
     $log.log('hiding splash screen')
     $cordovaSplashscreen.hide()
 
-runFn = ($rootScope, $ionicDeploy, $ionicPlatform, $cordovaStatusbar, $log) ->
+runFn = ($rootScope, $ionicDeploy, $ionicPlatform, $log) ->
 
 
   onAppReady = ->
