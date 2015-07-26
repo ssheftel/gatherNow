@@ -7,7 +7,7 @@
 ctrlName = 'AppCtrl'
 ctrlInstName = s.decapitalize(ctrlName)
 
-AppCtrl = ($log, $scope, $rootScope, $state, $stateParams, $window, $cordovaInAppBrowser) ->
+AppCtrl = ($log, $scope, $rootScope, $state, $stateParams, $window, $cordovaInAppBrowser, geoUtilsService) ->
   vm = @
   $log.log("Instantiating instance of #{ctrlName}")
 
@@ -18,7 +18,7 @@ AppCtrl = ($log, $scope, $rootScope, $state, $stateParams, $window, $cordovaInAp
   vm.moment = $window.moment
   vm.s = $window.s
   vm.$cordovaInAppBrowser = $cordovaInAppBrowser
-  #$rootScope.appCtrl = vm
+  vm.geoUtilsService = geoUtilsService
   return
 
 # ------------------------------Add To App-------------------------------------

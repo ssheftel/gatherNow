@@ -23,7 +23,7 @@ drctv = ($log, $timeout) ->
     $log.log("running #{name} directive link fn")
     ###map config - todo: move to service or make a directive argument###
     mapParams = {
-      'mapType': 'MAP_TYPE_NORMAL'#plugin.google.maps.MapTypeId.ROADMAP
+      'mapType': plugin.google.maps.MapTypeId.ROADMAP
       'controls': {
         'compass': true
         'myLocationButton': true
@@ -38,14 +38,16 @@ drctv = ($log, $timeout) ->
     }
     triggerMapReady = (map) ->
       $log.log("MAP_READY fired")
-      #map.setCenter(new plugin.google.maps.LatLng(37.422858, -122.085065))
       scope.mapReady({map:map})
 
 
-    map = plugin.google.maps.Map.setDiv(element[0])
-    map = plugin.google.maps.Map.getMap()
-    map.setDebuggable(true)
+    map = plugin.google.maps.Map.getMap(element[0], mapParams)
     map.on(plugin.google.maps.event.MAP_READY, triggerMapReady)
+
+    destroyCb = ->
+      $log.log("#{name} destroyed removing map instance")
+      map.remove()
+    scope.$on('$destroy',destroyCb)
 
   return d
 

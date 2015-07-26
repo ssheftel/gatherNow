@@ -40,25 +40,18 @@ tpl = """
 """
 ###Resolve Functions###
 rslvs = {}
-rslvs.events = ($http, cfg) ->
-  config = params:
-    max_results: 200
-    sort: 'start_date'
-    where: """{"start_date": {"$gte": "#{new Date().toISOString()}"}}"""
-  return $http.get(
-    "#{cfg.api}/events", config
-    ).then (resp) ->
-      resp.data
+rslvs.events = (eventsService) ->
+  return eventsService.loadEvents()
 
 
 ###Controller###
-Ctrl = ($log, $scope, cfg, $state, events, $http) ->
+Ctrl = ($log, $scope, cfg, $state, events, geoUtilsService) ->
   vm = @
   $log.log("Instantiating instance of #{ctrlName}")
-
   vm.name = ctrlName
   vm.headerTitle = 'Upcoming Events'
-  vm.events = events._items
+  vm.geoUtils = geoUtilsService
+  vm.events = events
   window.$state = $state
   activate = ->
     $log.log('activating!')

@@ -20,26 +20,20 @@ fullStateName = "tab.map"
 
 ###Resolve Functions###
 rslvs = {}
+rslvs.events = (eventsService) ->
+  return eventsService.loadEvents()
 
 ###Controller###
-Ctrl = ($log, $scope, cfg, $timeout) ->
+Ctrl = ($log, $scope, cfg, $timeout, events, eventsService) ->
   vm = @
   $log.log("Instantiating instance of MapCtrl")
 
   vm.name = "MapCtrl"
   vm.headerTitle = "map"
 
-  vm.onMapInit = (map) ->
-    alert('map is ready!')
-
-  $scope.$on('$stateChangeStart', ->
-    $scope.map.remove()
-  )
-
-  $scope.fn= ->
-    div = document.getElementById("map_canvas");
-    map = plugin.google.maps.Map.getMap(div)
-    return
+  $scope.onMapInit = (map) ->
+    $log.log('map is ready!')
+    #map.setCenter(new plugin.google.maps.LatLng(37.422858, -122.085065))
 
   # activation fn
   vm.activate = ->
