@@ -20,11 +20,13 @@ fullStateName = "tab.events.eventDetails"
 
 ###Resolve Functions###
 rslvs = {}
-rslvs.event = ($http, $stateParams, cfg) ->
-  return $http.get(
-    "#{cfg.api}/events/#{$stateParams.eventId}"
-  ).then (resp) ->
-    resp.data
+rslvs.events = (eventsService) ->
+  return eventsService.loadEvents()
+rslvs.event = ($stateParams, events) ->
+  for event in events
+    if event._id == $stateParams.eventId
+      return event
+  return null
 
 ###Controller###
 Ctrl = ($log, $scope, cfg, event, $cordovaCalendar) ->

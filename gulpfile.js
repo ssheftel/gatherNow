@@ -24,7 +24,7 @@ var paths = {
 };
 
 var preprocessor_context = {
-  DEBUG: true
+  DEBUG: false
 };
 
 gulp.task('default', ['sass']);

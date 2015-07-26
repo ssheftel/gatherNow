@@ -20,17 +20,17 @@ fullStateName = "tab.events"
 
 ###Template###
 tpl = """
-<ion-view view-title="{{ eventsCtrl.headerTitle }}">
+<ion-view view-title="{{::eventsCtrl.headerTitle}}">
   <ion-content class="padding">
     <ion-list>
       <ion-item class="item-avatar item-icon-right item-text-wrap" ng-repeat="item in eventsCtrl.events" ui-sref="tab.events.eventDetails({eventId: item._id})">
 
-          <img ng-src="{{item.image_url || 'http://www.gatherthejews.com/wp-content/uploads/2015/03/gather_the_jews_rectangle.png'}}">
+          <img ng-src="{{::item.image_url || 'http://www.gatherthejews.com/wp-content/uploads/2015/03/gather_the_jews_rectangle.png'}}">
           <i class="icon ion-chevron-right"></i>
 
-          <h2>{{item.title}}</h2>
-          <p ng-if="item.venue">{{item.venue}}</p>
-          <p>{{item.start_date | amDateFormat:'ddd. MMM Do'}} from {{item.start_date | amDateFormat:'h:mm a'}} - {{item.end_date | amDateFormat:'h:mm a'}}</p>
+          <h2>{{::item.title}}</h2>
+          <p ng-if="item.venue">{{::item.venue}}</p>
+          <p>{{::item.start_date | amDateFormat:'ddd. MMM Do'}} from {{::item.start_date | amDateFormat:'h:mm a'}} - {{::item.end_date | amDateFormat:'h:mm a'}}</p>
 
 
       </ion-item>

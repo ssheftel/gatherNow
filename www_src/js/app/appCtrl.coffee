@@ -18,7 +18,7 @@ AppCtrl = ($log, $scope, $rootScope, $state, $stateParams, $window, $cordovaInAp
   vm.moment = $window.moment
   vm.s = $window.s
   vm.$cordovaInAppBrowser = $cordovaInAppBrowser
-  vm.geoUtilsService = geoUtilsService
+  #vm.geoUtilsService = geoUtilsService
   return
 
 # ------------------------------Add To App-------------------------------------
