@@ -57,6 +57,23 @@ service = ($log, $http, $q, cfg, EventModel) ->
     filter = s._eventsWithinNDaysFilerFactory(30)
     return s._filterEvents(filter)
 
+  s._namedFiltersMap = {
+    'ALL': s._eventsWithinNDaysFilerFactory(365)
+    '1DAYS': s._eventsWithinNDaysFilerFactory(1)
+    '7DAYS': s._eventsWithinNDaysFilerFactory(7)
+    '30DAYS': s._eventsWithinNDaysFilerFactory(20)
+    'DEFAULT': s._eventsWithinNDaysFilerFactory(365)
+  }
+
+  ###
+    External method for filtering events - returns subset of events
+      accepts a filter function or a filter key defined in _namedFiltersMap
+  ###
+  s.filter = (keyOrFn) ->
+    return s._filterEvents(keyOrFn) if angular.isFunction(keyOrFn)
+    filterFn = s._namedFiltersMap[keyOrFn] or s._namedFiltersMap['DEFAULT']
+    return s._filterEvents(filterFn)
+
   return s
 
 # ------------------------------Add To App-------------------------------------
