@@ -34,7 +34,7 @@ runFn = ($rootScope, $ionicDeploy, $ionicPlatform, $log) ->
       return
 
     # Watch Ionic Deploy service for new code
-    $ionicDeploy.watch($rootScope.updateOptions).then( (->), (->), updateCb)
+    #$ionicDeploy.watch($rootScope.updateOptions).then( (->), (->), updateCb)
 
     return
 
