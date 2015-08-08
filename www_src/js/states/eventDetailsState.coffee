@@ -36,6 +36,11 @@ Ctrl = ($log, $scope, cfg, event, $cordovaCalendar) ->
   vm.name = "EventDetailsCtrl"
   vm.headerTitle = "Event Details"
   vm.event = event
+  vm._forceBackButton = (event, viewData) ->
+    viewData.enableBack = true
+
+  # force back button display in the view
+  $scope.$on('$ionicView.beforeEnter', vm._forceBackButton)
 
   # add the event to the users calendar
   vm.addEventToCalendar = ->
