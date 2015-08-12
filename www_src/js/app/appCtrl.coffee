@@ -19,6 +19,14 @@ AppCtrl = ($log, $scope, $rootScope, $state, $stateParams, $window, $cordovaInAp
   vm.s = $window.s
   vm.$cordovaInAppBrowser = $cordovaInAppBrowser
   #vm.geoUtilsService = geoUtilsService
+
+
+  vm.mapTabClicked = ->
+    $log.log("map tab has been clicked")
+    $state.go('tab.map')
+
+
+
   return
 
 # ------------------------------Add To App-------------------------------------

@@ -7,14 +7,14 @@
 tpl = """
 <ion-tabs class="tabs-icon-top tabs-color-active-positive">
 
-  <!-- START EVENTS TAB -->
+  <!-- START EVENTS TAB on-select="appCtrl.eventsTabSelected(this)" -->
   <ion-tab title="Events" icon-off="ion-ios-calendar-outline" icon-on="ion-ios-calendar" ui-sref="tab.events">
     <ion-nav-view name="events"></ion-nav-view><!-- "events" named view -->
   </ion-tab>
   <!-- END EVENTS TAB -->
 
   <!-- START MAP TAB -->
-  <ion-tab title="Map" icon-off="ion-ios-navigate-outline" icon-on="ion-ios-navigate" ui-sref="tab.map">
+  <ion-tab title="Map" icon-off="ion-ios-navigate-outline" icon-on="ion-ios-navigate" ng-click="appCtrl.mapTabClicked(this)" ui-sref="tab.map">
     <ion-nav-view name="map"></ion-nav-view><!-- "map" named view -->
   </ion-tab>
   <!-- END MAP TAB -->
@@ -62,4 +62,4 @@ tabsCfg = {
 
 gatherNow = angular.module('gatherNow')
 gatherNow.controller(ctrlName, TabsCtrl)
-gatherNow.config(($stateProvider) -> $stateProvider.state(tabsCfg);return;)
+gatherNow.config(($stateProvider) -> $stateProvider.state(tabsCfg))

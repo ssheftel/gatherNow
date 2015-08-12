@@ -13,8 +13,6 @@ pushd `dirname $0` > /dev/null
 SCRIPTPATH=`pwd -P`
 popd > /dev/null
 
-echo "--variable API_KEY_FOR_ANDROID=\"$GMAPS_API_KEY_FOR_ANDROID\" --variable API_KEY_FOR_IOS=\"$GMAPS_API_KEY_FOR_IOS\""
-
 read -p "Which platforms do you want to build? (android ios): " platforms
 platforms=${platforms:-"android ios"}
 
@@ -27,6 +25,7 @@ cordova platform add $platforms
 cordova plugin add $SCRIPTPATH/cached_plugins/phonegap-googlemaps-plugin --variable API_KEY_FOR_ANDROID="$GMAPS_API_KEY_FOR_ANDROID" --variable API_KEY_FOR_IOS="$GMAPS_API_KEY_FOR_IOS"
 cordova plugin add org.apache.cordova.splashscreen
 cordova plugin add $SCRIPTPATH/cached_plugins/Calendar-PhoneGap-Plugin
+cordova plugin add org.apache.cordova.network-information
 #cordova plugin add $SCRIPTPATH/cached_plugins/cordova-plugin-background-geolocation
 #
 cordova plugin add org.apache.cordova.device

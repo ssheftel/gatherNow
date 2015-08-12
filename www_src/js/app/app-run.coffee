@@ -3,12 +3,15 @@ gatherNow = angular.module('gatherNow')
 
 # ------------------------------Main Code--------------------------------------
 
-splashScreenTimerRunFn = ($log, $cordovaSplashscreen, eventsService) ->
+splashScreenTimerRunFn = ($log, $timeout, $cordovaSplashscreen, eventsService) ->
   $log.log('getting events data, will hide splash screen after promise resolves')
-  ###TODO: handel when user has no internet connection###
-  eventsService.loadEvents().then (data) ->
+  hideSplashScreen = ->
     $log.log('hiding splash screen')
     $cordovaSplashscreen.hide()
+    return
+  ###TODO: handel when user has no internet connection###
+  eventsService.loadEvents().finally(hideSplashScreen )
+  $timeout( hideSplashScreen, 5 * 1000)
 
 runFn = ($rootScope, $ionicDeploy, $ionicPlatform, $log) ->
 
@@ -42,7 +45,19 @@ runFn = ($rootScope, $ionicDeploy, $ionicPlatform, $log) ->
 
   return
 
+noInternetConnectionWarning = ($ionicPlatform, $ionicPopup) ->
+  onAppReady = ->
+    #todo change this to a state
+    popupConfig =
+      title: "Internet Disconnected"
+      content: "The internet is disconnected on your device."
+    exitApp = -> ionic.Platform.exitApp()#not working
+    if window.Connection and navigator.connection.type == Connection.NONE
+      $ionicPopup.confirm(popupConfig).then (result) -> exitApp() if not result
+    return
+  $ionicPlatform.ready(onAppReady)
 # ------------------------------Add To App-------------------------------------
 
 gatherNow.run(splashScreenTimerRunFn)
 gatherNow.run(runFn)
+gatherNow.run(noInternetConnectionWarning)

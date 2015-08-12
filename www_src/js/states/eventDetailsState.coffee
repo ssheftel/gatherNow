@@ -29,7 +29,7 @@ rslvs.event = ($stateParams, events) ->
   return null
 
 ###Controller###
-Ctrl = ($log, $scope, cfg, event, $cordovaCalendar) ->
+Ctrl = ($log, $scope, cfg, event, $cordovaCalendar, $ionicHistory) ->
   vm = @
   $log.log("Instantiating instance of EventDetailsCtrl")
 
@@ -77,9 +77,21 @@ stateCfg = {
   cache: false
 }
 
+##Map Details Hack TODO: make view a directive - Cause of back button issue
+mapDetailsStateConfig = {
+  url: "/:eventId"
+  resolve: rslvs
+  views: "map@tab": {
+  templateUrl: 'js/states/eventDetailsState.html'
+  controller: "EventDetailsCtrl as eventDetailsCtrl"}
+  cache: false
+}
 
 
 # ------------------------------Add To App-------------------------------------
 gatherNowStates = angular.module('gatherNow.states')
 gatherNowStates.controller("EventDetailsCtrl", Ctrl)
 gatherNowStates.config(($stateProvider) -> $stateProvider.state("tab.events.eventDetails", stateCfg))
+
+# TODO: make view a directive Hack
+gatherNowStates.config(($stateProvider) -> $stateProvider.state("tab.map.eventDetails", mapDetailsStateConfig))

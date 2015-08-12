@@ -67,7 +67,7 @@ Ctrl = ($log, $scope, cfg, $timeout, eventsService, $q) ->
       styles: {'text-align': 'center'}
       callback: ({marker, map, markerCfg}) ->
         $log.log("marker info clicked for event = #{event._id}")
-        marker.addEventListener(plugin.google.maps.event.INFO_CLICK, -> $state.go('tab.events.eventDetails', {eventId: event._id}))
+        marker.addEventListener(plugin.google.maps.event.INFO_CLICK, -> $state.go('tab.map.eventDetails', {eventId: event._id}))
     }
     return markerConfig
 
