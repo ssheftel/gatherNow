@@ -18,14 +18,6 @@ ctrlName = "PreferencesCtrl"
 ctrlInstName = "preferencesCtrl"
 fullStateName = "tab.preferences"
 
-###Template###
-tpl = """
-<ion-view cache-view="false" view-title="{{ preferencesCtrl.headerTitle }}">
-  <ion-content class="padding">
-    <h1>{{ preferencesCtrl.name }}</h1>
-  </ion-content>
-</ion-view>
-"""
 
 ###Resolve Functions###
 rslvs = {}
@@ -36,7 +28,7 @@ Ctrl = ($log, $scope, cfg) ->
   $log.log("Instantiating instance of PreferencesCtrl")
 
   vm.name = "PreferencesCtrl"
-  vm.headerTitle = "preferences"
+  vm.headerTitle = "Preferences"
 
 
   # activation fn
@@ -51,8 +43,9 @@ stateCfg = {
   url: "/preferences"
   resolve: rslvs
   views: "preferences@tab": {
-  template: tpl
+  templateUrl: 'js/states/preferences.html'
   controller: "PreferencesCtrl as preferencesCtrl"}
+  cache: false
 }
 
 

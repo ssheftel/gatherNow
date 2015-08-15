@@ -1,0 +1,14 @@
+<!-- START preferencesFavOrgs -->
+
+<ion-view cache-view="false" view-title="{{ preferencesFavOrgsCtrl.headerTitle }}">
+  <ion-content class="padding">
+
+    <!-- START TICK LIST-->
+    <tick-list multiple="true" selected-icon="ion-star energized">
+      <tick-list-item ng-repeat="item in items" selected="{{item.selected}}" model="item" on-change="onItemChanged(item)">{{::item.label}}</tick-list-item>
+    </tick-list>
+    <!-- END TICK LIST-->
+  </ion-content>
+</ion-view>
+
+<!-- END preferencesFavOrgs -->

@@ -28,7 +28,7 @@ tpl = """
           <img ng-src="{{::item.image_url || 'http://www.gatherthejews.com/wp-content/uploads/2015/03/gather_the_jews_rectangle.png'}}">
           <i class="icon ion-chevron-right"></i>
 
-          <h2>{{::item.title}}</h2>
+          <h2>{{::item.title}}<span ng-show="eventsCtrl.$storage.favsOrgs[item.organizer]" class="energized">&#9733</span></h2>
           <p ng-if="item.venue">{{::item.venue}}</p>
           <p>{{::item.start_date | amDateFormat:'ddd. MMM Do'}} from {{::item.start_date | amDateFormat:'h:mm a'}} - {{::item.end_date | amDateFormat:'h:mm a'}}</p>
 
@@ -45,13 +45,14 @@ rslvs.events = (eventsService) ->
 
 
 ###Controller###
-Ctrl = ($log, $scope, cfg, $state, events, geoUtilsService) ->
+Ctrl = ($log, $scope, cfg, $state, events, geoUtilsService, $localStorage) ->
   vm = @
   $log.log("Instantiating instance of #{ctrlName}")
   vm.name = ctrlName
   vm.headerTitle = 'Upcoming Events'
   vm.geoUtils = geoUtilsService
   vm.events = events
+  vm.$storage = $localStorage
   window.$state = $state
   activate = ->
     $log.log('activating!')
